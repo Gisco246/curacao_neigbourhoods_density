@@ -158,7 +158,7 @@ function drawMap(data, colorize) {
 					// reset the layer style to its original stroke color
 					layer.setStyle({
 						color: '#525252'
-					});
+					}).bringToBack();
 				});
 			}
 		},
@@ -197,6 +197,10 @@ function selectAttributeDropdown(neigborhoods, colorize) {
 	});
 }
 function selectAttributeCheckbox(data) {
+	map.createPane('circles');
+	map.getPane('circles').style.zIndex = 1;
+	map.getPane('circles').style.pointerEvents = 'none';
+	
 	const neigborhoods = L.geoJson(data, {
 		pointToLayer: function (feature, ll) {
 			if (feature.geometry.type == "Point") {
@@ -209,18 +213,18 @@ function selectAttributeCheckbox(data) {
 				})
 			}
 		}
-	})
+	},{pane:'circles'})
 
 	neigborhoods.eachLayer(function (layer) {
 		console.log('this_layer',Number(layer.feature.properties.additionalData.income_ang))
 		radius= Number(layer.feature.properties.additionalData.income_ang)/1000
 		layer.setRadius(radius);
 	});
-		
 	
 
 	$('.checkbox input[type="checkbox"]').click(function () {
 		if ($(this).prop("checked") == true) {
+
 			neigborhoods.addTo(map);
 		}
 		else if ($(this).prop("checked") == false) {
