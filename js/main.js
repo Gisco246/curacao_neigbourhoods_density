@@ -79,14 +79,12 @@ function processData(neigborhoods, data) {
 		// iterate through all the props of each neighborhood
 		for (const prop in neighborhood.properties.additionalData) {
 			
-			// if the attribute is a number and not one of the fips codes or name
-			if (prop == "population size" || prop == "households" ) {
-				// console.log('prop:',prop);
-				// push that attribute value into the array
-				
+			// if the attribute is a number 
+			if (prop == "population size" || prop == "number of households" ) {
+							
 				if (neighborhood.properties.additionalData[prop]> 0){
 					//console.log(neighborhood.properties.additionalData[prop])
-				rates.push(Number(neighborhood.properties.additionalData[prop]));}
+				rates.push(Number(neighborhood.properties.additionalData[prop] / neighborhood.properties['area_sq_km']));}
 			}
 		}
 	});
@@ -98,8 +96,8 @@ function processData(neigborhoods, data) {
 	var breaks = chroma.limits(rates, 'k', 5);
 
 	// create color generator function
-	var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
-	//var colorize = chroma.scale(['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c']).classes(breaks).mode('lab'); removed , colors not representative of map
+	//var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+	var colorize = chroma.scale(['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c']).classes(breaks).mode('lab');// removed , colors not representative of map
 
 	//console.log(colorize) // function (a){var b;return b=s(u(a)),m&&b[m]?b[m]():b}
 
@@ -147,10 +145,20 @@ function drawMap(data, colorize) {
 	map.fitBounds(neigborhoods.getBounds(), {
 		padding: [18, 18] // add padding around neighbourhoods
 	});
+	selectAttributeDropdown(neigborhoods, colorize);
 	//addUi(neighbourhoods); // add the UI controls
 	//updateMap(neighbourhoods); // draw the map 
-	//updateMap(neigborhoods, colorize, 'number of households');
+	updateMap(neigborhoods, colorize, '');
 
+}
+
+function selectAttributeDropdown(neigborhoods, colorize){
+
+	
+	$( "#dropdown-ui select" ).change(function() {
+		console.log($(this).val())
+		updateMap(neigborhoods, colorize, $(this).val());
+	  });
 }
 function updateMap(dataLayer, colorize, subject) {
 
@@ -158,14 +166,26 @@ function updateMap(dataLayer, colorize, subject) {
 
 		const props = layer.feature.properties.additionalData;
 
-		if (typeof (props) != 'undefined') {
+		if (typeof (props) != 'undefined' && subject !='') {
 			// console.log('props',props);
 			// set the fill color of layer based on its normalized data value
+			let subjectPerArea = Number(props[subject]/layer.feature.properties['area_sq_km']).toFixed(0);
 			layer.setStyle({
-				fillColor: colorize(Number(props[subject]))
+				fillColor: colorize(subjectPerArea)
 			});
 
-			let tooltipInfo = `<b>${props["neighbourhood"]}</b><br>Population <b>${props[subject]}</b>`
+			let tooltipInfo = `<b>${props["neighbourhood"]}</b><br>${subject} per Km&sup2; <b>${subjectPerArea}</b>`
+
+			// bind a tooltip to layer with county-specific information
+			layer.bindTooltip(tooltipInfo, {
+				// sticky property so tooltip follows the mouse
+				sticky: true
+			});
+		}else {
+			layer.setStyle({
+				fillColor: 'black'
+			});
+			let tooltipInfo = `<b>${props["neighbourhood"]}</b></b>`
 
 			// bind a tooltip to layer with county-specific information
 			layer.bindTooltip(tooltipInfo, {
