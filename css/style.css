@@ -63,6 +63,8 @@ p {
     left: 1em;
     bottom: 1em;
     z-index: 20000;
+    background-color: black;
+    color:white
 }
 .leaflet-tooltip{
     background-color: black !important;

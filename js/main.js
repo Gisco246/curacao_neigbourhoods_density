@@ -106,8 +106,8 @@ function processData(neigborhoods, data) {
 
 	// create color generator function
 	//var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
-	var colorize = chroma.scale(['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c']).classes(breaks).mode('lab');// removed , colors not representative of map
-	//var colorize = chroma.scale(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']).classes(breaks).mode('lab');// removed , colors not representative of map
+	//var colorize = chroma.scale(['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c']).classes(breaks).mode('lab');// removed , colors not representative of map
+	var colorize = chroma.scale(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']).classes(breaks).mode('lab');// removed , colors not representative of map
 	//var colorize = chroma.scale(['#080000','#400100','#800200','#BF0300','#FF0400']).classes(breaks).mode('lab');// removed , colors not representative of map
 
 	//console.log(colorize) // function (a){var b;return b=s(u(a)),m&&b[m]?b[m]():b}
@@ -200,7 +200,7 @@ function selectAttributeCheckbox(data) {
 	map.createPane('circles');
 	map.getPane('circles').style.zIndex = 1;
 	map.getPane('circles').style.pointerEvents = 'none';
-	
+
 	const neigborhoods = L.geoJson(data, {
 		pointToLayer: function (feature, ll) {
 			if (feature.geometry.type == "Point") {
@@ -208,19 +208,19 @@ function selectAttributeCheckbox(data) {
 					opacity: 1,
 					weight: 2,
 					fillOpacity: 0
-					
+
 
 				})
 			}
 		}
-	},{pane:'circles'})
+	}, { pane: 'circles' })
 
 	neigborhoods.eachLayer(function (layer) {
-		console.log('this_layer',Number(layer.feature.properties.additionalData.income_ang))
-		radius= Number(layer.feature.properties.additionalData.income_ang)/1000
+		console.log('this_layer', Number(layer.feature.properties.additionalData.income_ang))
+		radius = Number(layer.feature.properties.additionalData.income_ang) / 1000
 		layer.setRadius(radius);
 	});
-	
+
 
 	$('.checkbox input[type="checkbox"]').click(function () {
 		if ($(this).prop("checked") == true) {
