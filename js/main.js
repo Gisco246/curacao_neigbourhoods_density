@@ -148,8 +148,8 @@ function drawMap(data, colorize) {
 					console.log(feature.properties);
 					// change the stroke color and bring that element to the front
 					layer.setStyle({
-						color: '#fffe00'
-					}).bringToFront();
+						fillColor: '#fffe00'
+					})//.bringToFront();
 				});
 
 				// on mousing off layer
@@ -157,8 +157,8 @@ function drawMap(data, colorize) {
 
 					// reset the layer style to its original stroke color
 					layer.setStyle({
-						color: '#525252'
-					}).bringToBack();
+						fillColor: '#000'
+					})//.bringToBack();
 				});
 			}
 		},
@@ -208,15 +208,17 @@ function selectAttributeCheckbox(data) {
 					opacity: 1,
 					weight: 2,
 					fillOpacity: 0
-
-
 				})
 			}
 		}
-	}, { pane: 'circles' })
+	}
+	// , { pane: 'circles' }
+	)
 
 	neigborhoods.eachLayer(function (layer) {
 		console.log('this_layer', Number(layer.feature.properties.additionalData.income_ang))
+		let tooltipInfo = layer.feature.properties.additionalData.income_ang.toLocaleString()
+		layer.bindTooltip(tooltipInfo)
 		radius = Number(layer.feature.properties.additionalData.income_ang) / 1000
 		layer.setRadius(radius);
 	});
