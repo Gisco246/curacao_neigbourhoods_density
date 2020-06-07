@@ -147,8 +147,8 @@ function drawMap(data, colorize) {
 					console.log(feature.properties);
 					// change the stroke color and bring that element to the front
 					layer.setStyle({
-						color: '#fffe00'
-					}).bringToFront();
+						fillColor: '#fffe00'
+					});//.bringToFront();
 				});
 
 				// on mousing off layer
@@ -156,8 +156,8 @@ function drawMap(data, colorize) {
 
 					// reset the layer style to its original stroke color
 					layer.setStyle({
-						color: '#525252'
-					}).bringToBack();
+						fillColor: '#000'
+					});//.bringToBack();
 				});
 			}
 		},
@@ -252,6 +252,20 @@ function updateMap(dataLayer, colorize, subject) {
 				fillColor: colorize(subjectPerArea)
 			});
 
+			layer.on('mouseover', function () {
+				// change the fill color 
+				layer.setStyle({
+					fillColor: '#fffe00'
+				});//.bringToFront();
+			});
+
+			// on mousing off layer
+			layer.on('mouseout', function () {
+				// reset the layer style to its original stroke color
+				layer.setStyle({
+					fillColor: colorize(subjectPerArea)
+				});//.bringToBack();
+			});
 			let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b><br>${subject} per Km&sup2; <b>${subjectPerArea}</b>`
 
 			// bind a tooltip to layer with county-specific information
@@ -263,6 +277,12 @@ function updateMap(dataLayer, colorize, subject) {
 			if (layer.feature.geometry.type == "MultiPolygon") {
 				layer.setStyle({
 					fillColor: 'black'
+				});
+				layer.on('mouseout', function () {
+					// reset the layer style to its original stroke color
+					layer.setStyle({
+						fillColor: '#000'
+					});//.bringToBack();
 				});
 				let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b></b>`
 
