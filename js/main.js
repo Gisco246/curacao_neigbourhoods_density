@@ -147,8 +147,8 @@ function drawMap(data, colorize) {
 					console.log(feature.properties);
 					// change the stroke color and bring that element to the front
 					layer.setStyle({
-						color: '#fffe00'
-					}).bringToFront();
+						fillColor: '#fffe00'
+					})//.bringToFront();
 				});
 
 				// on mousing off layer
@@ -156,8 +156,8 @@ function drawMap(data, colorize) {
 
 					// reset the layer style to its original stroke color
 					layer.setStyle({
-						color: '#525252'
-					}).bringToBack();
+						fillColor: '#000'
+					})//.bringToBack();
 				});
 			}
 		},
@@ -207,15 +207,17 @@ function selectAttributeCheckbox(data) {
 					opacity: 1,
 					weight: 2,
 					fillOpacity: 0
-
-
 				})
 			}
 		}
-	}, { pane: 'circles' })
+	}
+		// , { pane: 'circles' }
+	)
 
 	neigborhoods.eachLayer(function (layer) {
 		console.log('this_layer', Number(layer.feature.properties.additionalData.income_ang))
+		let tooltipInfo = layer.feature.properties.additionalData.income_ang.toLocaleString()
+		layer.bindTooltip(tooltipInfo)
 		radius = Number(layer.feature.properties.additionalData.income_ang) / 1000
 		layer.setRadius(radius);
 	});
@@ -252,6 +254,15 @@ function updateMap(dataLayer, colorize, subject) {
 				fillColor: colorize(subjectPerArea)
 			});
 
+			// on mousing off layer
+			layer.on('mouseout', function () {
+
+				// reset the layer style to its original stroke color
+				layer.setStyle({
+					fillColor: colorize(subjectPerArea)
+				})//.bringToBack();
+			});
+
 			let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b><br>${subject} per Km&sup2; <b>${subjectPerArea}</b>`
 
 			// bind a tooltip to layer with county-specific information
@@ -262,7 +273,14 @@ function updateMap(dataLayer, colorize, subject) {
 		} else {
 			if (layer.feature.geometry.type == "MultiPolygon") {
 				layer.setStyle({
-					fillColor: 'black'
+					fillColor: '#000'
+				});
+				layer.on('mouseout', function () {
+
+					// reset the layer style to its original stroke color
+					layer.setStyle({
+						fillColor: '#000'
+					})//.bringToBack();
 				});
 				let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b></b>`
 
