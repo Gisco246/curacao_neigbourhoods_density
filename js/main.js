@@ -212,7 +212,7 @@ function selectAttributeCheckbox(data) {
 			}
 		}
 	}
-	// , { pane: 'circles' }
+		// , { pane: 'circles' }
 	)
 
 	neigborhoods.eachLayer(function (layer) {
@@ -267,7 +267,14 @@ function updateMap(dataLayer, colorize, subject) {
 		} else {
 			if (layer.feature.geometry.type == "MultiPolygon") {
 				layer.setStyle({
-					fillColor: 'black'
+					fillColor: '#000'
+				});
+				layer.on('mouseout', function () {
+
+					// reset the layer style to its original stroke color
+					layer.setStyle({
+						fillColor: '#000'
+					})//.bringToBack();
 				});
 				let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b></b>`
 
