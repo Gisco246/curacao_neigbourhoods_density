@@ -8,7 +8,7 @@ const options = {
 
 // create Leaflet map and apply options
 const map = L.map('map', options);
-
+map.doubleClickZoom.disable(); 
 // request a basemap tile layer and add to the map
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -198,7 +198,7 @@ function selectAttributeDropdown(neigborhoods, colorize) {
 }
 function selectAttributeCheckbox(data) {
 	map.createPane('circles');
-	map.getPane('circles').style.zIndex = 1;
+	map.getPane('circles').style.zIndex = 655;
 	map.getPane('circles').style.pointerEvents = 'none';
 
 	const neigborhoods = L.geoJson(data, {
@@ -220,9 +220,10 @@ function selectAttributeCheckbox(data) {
 		radius = Number(layer.feature.properties.additionalData.income_ang) / 1000
 		layer.setRadius(radius);
 	});
+	
 
-
-	$('.checkbox input[type="checkbox"]').click(function () {
+	$('.checkbox input[type="checkbox"]').click(function (e) {
+		e.stopPropagation();
 		if ($(this).prop("checked") == true) {
 
 			neigborhoods.addTo(map);
@@ -231,6 +232,12 @@ function selectAttributeCheckbox(data) {
 			map.removeLayer(neigborhoods);
 		}
 	});
+	$(".checkbox").click(function(event){
+		
+		L.DomEvent.stopPropagation(event);
+		 event.stopPropagation();
+	});
+
 }
 function updateMap(dataLayer, colorize, subject) {
 
