@@ -206,7 +206,8 @@ function selectAttributeCheckbox(data) {
 				return L.circleMarker(ll, {
 					opacity: 1,
 					weight: 2,
-					fillOpacity: 0
+					fillOpacity: 0,
+					color:'#ff00ff'
 
 
 				})
@@ -220,6 +221,21 @@ function selectAttributeCheckbox(data) {
 		layer.setRadius(radius);
 		let tooltipInfo = `<b>Average Income of Neighbourhood</b>: Fl.${Number(layer.feature.properties.additionalData.income_ang).toFixed(2).toLocaleString()}`
 		layer.bindTooltip(tooltipInfo)
+		layer.on('mouseover', function () {
+			// change the fill color 
+			layer.setStyle({
+				color: '#0000ff'
+			});//.bringToFront();
+		});
+
+		// on mousing off layer
+		layer.on('mouseout', function () {
+			// reset the layer style to its original stroke color
+			layer.setStyle({
+				color: '#ff00ff'
+			});//.bringToBack();
+		});
+	
 	});
 	
 
