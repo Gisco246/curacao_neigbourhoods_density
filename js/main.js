@@ -218,6 +218,8 @@ function selectAttributeCheckbox(data) {
 		console.log('this_layer', Number(layer.feature.properties.additionalData.income_ang))
 		radius = Number(layer.feature.properties.additionalData.income_ang) / 1000
 		layer.setRadius(radius);
+		let tooltipInfo = `<b>Average Income of Neighbourhood</b>: Fl.${Number(layer.feature.properties.additionalData.income_ang).toFixed(2).toLocaleString()}`
+		layer.bindTooltip(tooltipInfo)
 	});
 	
 
