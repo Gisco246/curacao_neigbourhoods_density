@@ -248,6 +248,15 @@ function updateMap(dataLayer, colorize, subject) {
 				fillColor: colorize(subjectPerArea)
 			});
 
+			// on mousing off layer
+			layer.on('mouseout', function () {
+
+				// reset the layer style to its original stroke color
+				layer.setStyle({
+					fillColor: colorize(subjectPerArea)
+				})//.bringToBack();
+			});
+
 			let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b><br>${subject} per Km&sup2; <b>${subjectPerArea}</b>`
 
 			// bind a tooltip to layer with county-specific information
