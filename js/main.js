@@ -77,7 +77,6 @@ function processData(neigborhoods, data) {
 	//second loop
 	// empty array to store all the data values
 	const rates = [];
-	const drates = [];
 	//console.log('Neigbourhoods..', neigborhoods)
 	// iterate through all the neigborhoods
 	neigborhoods.features.forEach(function (neighborhood) {
