@@ -16,75 +16,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&family=Oswald&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
-    <div class="container-fluid">
-        <header class="row  text-white py-3">
-            <div class="col">
-                <h1>Curacao Neighbourhoods Map</h1>
-            </div>
-        </header>
+</head>
+<div class="container-fluid">
+    <header class="row  text-white py-3">
+        <div class="col">
+            <h1>Curacao Neighbourhoods Map</h1>
+        </div>
+    </header>
 
-        <section class="row">
-            <div class="col-md-8 col-lg-9 col-xl-10 order-md-2 px-0">
-                <div id="map">
-                    <div class="form-group  dropdown-ui" id="dropdown-ui">
-                        <select class="form-control bg-primary text-white">
-                            <option value="" selected>Select an option</option>
-                            <option value="population size">Population per area</option>
-                            <option value="number of households">Household per area</option>
-                        </select>
-                    </div>
-                    <div class="form-group checkbox p-2">
-                        <input type="checkbox" ><span class="pl-2">Income</span>
-                    </div>
-
+    <section class="row">
+        <div class="col-md-8 col-lg-9 col-xl-10 order-md-2 px-0">
+            <div id="map">
+                <div class="form-group  dropdown-ui" id="dropdown-ui">
+                    <select class="form-control bg-primary text-white">
+                        <option class="faded" value="" selected>Select an option</option>
+                        <option value="population size">Population per area</option>
+                        <option value="number of households">Household per area</option>
+                    </select>
                 </div>
+                <div class="form-group checkbox p-2">
+                    <input type="checkbox"><span class="pl-2">Income</span>
+                </div>
+
             </div>
-            <aside id="about" class="col-md-4 col-lg-3 col-xl-2 order-md-1 text-white py-2 pl-3 pr-3 overflow-auto">
-                <section>
-                    <h3 class="py-2">Side Title</h3>
-                    <p>AThe map will show a measurement of population per unit area of the neighbourhoods. It will also
-                        show the number of households per unit area of the neighbourhoods in Curacao. the map must show
-                        the income in each neighbourhood. The data will be available from the central bureau of
-                        statistics of Curacao.</p>
+        </div>
+        <aside id="about" class="col-md-4 col-lg-3 col-xl-2 order-md-1 text-white py-2 pl-3 pr-3 overflow-auto">
+            <section>
+                <h3 class="py-2">Description</h3>
+                <p>This map shows a measurement of population per unit area of the neighbourhoods. It also
+                    shows the number of households per unit area of the neighbourhoods in Curacao. The map shows
+                    the income in each neighbourhood when you check the checkbox.</p>
 
-                </section>
-            </aside>
-        </section>
+            </section>
+        </aside>
+    </section>
 
-        <footer class="row  text-white py-3">
-            <div class="col">
-                <ul class="list-unstyled">
-                    <li>Authored by <a href="https://gisco246.github.io/portfolio/" target="_blank">Giscard Gomperts</a>
-                    </li>
-                    <li>Author Date</li>
-                    <li>data source: <a href="http://www.cbs.cw">Central Bureau of statistics of Curacao</a></li>
-                </ul>
-            </div>
-        </footer>
-    </div>
-    <!-- legend is outside of container-fluid and will be dynamically added to map -->
-    <div class="bg-secondary py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
+    <footer class="row  text-white py-3">
+        <div class="col">
+            <ul class="list-unstyled">
+                <li>Authored by <a href="https://gisco246.github.io/portfolio/" target="_blank">Giscard Gomperts</a>
+                </li>
+                <li>Author Date: <b>7 June 2020</b></li>
+                <li>data source: <a href="http://www.cbs.cw">Central Bureau of statistics of Curacao</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+<!-- legend is outside of container-fluid and will be dynamically added to map -->
+<div class="bg-secondary py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
 
-	<!-- ui is outside of container-fluid and will be dynamically added to map -->
+<!-- ui is outside of container-fluid and will be dynamically added to map -->
 
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
-    <script src="js/main.js"></script>
-    </body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 
 </html>

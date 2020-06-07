@@ -59,6 +59,7 @@ p {
     background-color: black !important;
 }
 .checkbox{
+    border-radius: 5px;
     position: absolute;
     left: 1em;
     bottom: 1em;
@@ -69,6 +70,10 @@ p {
 .leaflet-tooltip{
     background-color: black !important;
     color:white !important;
+}
+.faded {
+    color: rgba(163, 163, 163, 0.493) !important;
+    
 }
 /* Small devices (landscape phones, 576px and up) */
 
