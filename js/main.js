@@ -114,6 +114,7 @@ function processData(neigborhoods, data) {
 		selectAttributeCheckbox(neigborhoods);
 	} else {
 		drawMap(neigborhoods, colorize);
+		drawLegend(breaks,colorize) ;
 	}
 
 
@@ -314,3 +315,38 @@ function updateMap(dataLayer, colorize, subject) {
 	});
 
 } // end updateMap()
+
+
+function drawLegend(breaks,colorize) {
+	var legendControl = L.control({
+	position: 'topleft'
+	});
+	console.log(breaks)
+	legendControl.onAdd = function(map) {
+
+		var legend = L.DomUtil.create('div', 'legend');
+		return legend;
+
+	};
+
+	legendControl.addTo(map);
+
+	const legend = $('.legend').html("<h3><span>2011</span> Number of Household/ population per Km&sup2 </h3><ul>");
+
+	for (let i = 0; i < breaks.length - 1; i++) {
+
+		const color = colorize(breaks[i], breaks);
+
+		const classRange = `<li><span style="background:${color}"></span>
+			${Number(breaks[i]).toFixed(0).toLocaleString()} &mdash;
+			${Number(breaks[i + 1]).toFixed(0).toLocaleString()} </li>`
+
+		$('.legend ul').append(classRange);
+	}
+
+	// Add legend item for missing data
+	$('.legend ul').append(`<li><span style="background:lightgray"></span>
+			Data not available</li>`)
+
+	legend.append("</ul>");
+  }
