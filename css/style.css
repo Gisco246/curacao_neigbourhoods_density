@@ -26,6 +26,7 @@ p {
 }
 /*legend*/
 .legend {
+    visibility: hidden;
     padding: 6px 8px;
     font-size: 1em;
     background: rgba(75, 75, 75, 0.8);
@@ -87,6 +88,11 @@ p {
     background-color: black !important;
     color:white !important;
 }
+.income-tooltip{
+    color:#ff00ff !important;
+    border: 1px solid #ff00ff
+}
+
 .faded {
     color: rgba(163, 163, 163, 0.493) !important;
     
@@ -101,11 +107,18 @@ p {
     aside {
         height: 80vh;
     }
+    .legend{
+        visibility:visible;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
 
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+    .legend{
+        visibility:visible;
+    }
+}
 
 /* Extra large devices (large desktops, 1200px and up) */
 

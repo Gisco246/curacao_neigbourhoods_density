@@ -221,7 +221,10 @@ function selectAttributeCheckbox(data) {
 		radius = Number(layer.feature.properties.additionalData.income_ang) / 1000
 		layer.setRadius(radius);
 		let tooltipInfo = `<b>Average Income of Neighbourhood</b>: Fl.${Number(layer.feature.properties.additionalData.income_ang).toFixed(2).toLocaleString()}`
-		layer.bindTooltip(tooltipInfo)
+		layer.bindTooltip(tooltipInfo, {
+			// sticky property so tooltip follows the mouse
+			sticky: true , className: 'income-tooltip' 
+		});
 		layer.on('mouseover', function () {
 			// change the fill color 
 			layer.setStyle({
@@ -331,7 +334,7 @@ function drawLegend(breaks,colorize) {
 
 	legendControl.addTo(map);
 
-	const legend = $('.legend').html("<h3><span>2011</span> Number of Household/ population per Km&sup2 </h3><ul>");
+	const legend = $('.legend').html("<h3><span>2011</span> Number of Household/ Population per Km&sup2 </h3><ul>");
 
 	for (let i = 0; i < breaks.length - 1; i++) {
 
@@ -345,7 +348,7 @@ function drawLegend(breaks,colorize) {
 	}
 
 	// Add legend item for missing data
-	$('.legend ul').append(`<li><span style="background:lightgray"></span>
+	$('.legend ul').append(`<li><span style="background:black"></span>
 			Data not available</li>`)
 
 	legend.append("</ul>");
