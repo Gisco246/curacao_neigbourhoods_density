@@ -66,6 +66,7 @@ function processData(neigborhoods, data) {
 
 				// re-assign the data for that county as the county's props
 				i.properties.additionalData = j;
+				console.log(i.properties.additionalData )
 
 				// no need to keep looping, break from inner loop
 				break;
@@ -164,8 +165,6 @@ function drawMap(data, colorize) {
 		},
 		pointToLayer: function (feature, ll) {
 			if (feature.geometry.type == "Point") {
-
-
 
 				return L.circleMarker(ll, {
 					opacity: 1,
