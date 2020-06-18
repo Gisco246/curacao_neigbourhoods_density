@@ -115,7 +115,7 @@ function processData(neigborhoods, data) {
 		selectAttributeCheckbox(neigborhoods);
 	} else {
 		// getBreaks(neigborhoods, "number of households")
-		drawMap(neigborhoods, colorize);
+		drawMap(neigborhoods);
 		// drawLegend(breaks,colorize) ; // wait until variable is selected
 	}
 
@@ -124,7 +124,7 @@ function processData(neigborhoods, data) {
 
 
 
-function drawMap(joinedData, colorize) {
+function drawMap(joinedData) {
 
 	console.log(joinedData); // data is now accessible here
 	// create Leaflet data layer and add to map
@@ -186,7 +186,11 @@ function drawMap(joinedData, colorize) {
 	//addUi(neighbourhoods); // add the UI controls
 	//updateMap(neighbourhoods); // draw the map 
 	console.log(neigborhoods)
-	updateMap(neigborhoods, '', []);
+	
+	const subject = "population size"
+	const breaks = getBreaks(joinedData, subject)
+	updateMap(neigborhoods, subject, breaks)
+	drawLegend(breaks, subject)
 
 }
 
@@ -355,7 +359,6 @@ function getBreaks(neighborhoods, selected) {
 				if (selected == "population size" || selected == "number of households") {
 
 					rates.push(Number(neighborhood.properties.additionalData[selected] / neighborhood.properties['area_sq_km']));
-					console.log("calculating")
 
 				} 
 				
