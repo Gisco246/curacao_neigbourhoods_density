@@ -66,7 +66,7 @@ function processData(neigborhoods, data) {
 
 				// re-assign the data for that county as the county's props
 				i.properties.additionalData = j;
-				console.log(i.properties.additionalData )
+				// console.log(i.properties.additionalData )
 
 				// no need to keep looping, break from inner loop
 				break;
@@ -318,20 +318,25 @@ function updateMap(dataLayer, colorize, subject) {
 
 } // end updateMap()
 
+function addLegend() {
+	var legendControl = L.control({
+		position: 'topleft'
+		});
+		legendControl.onAdd = function(map) {
+	
+			var legend = L.DomUtil.create('div', 'legend');
+			return legend;
+	
+		};
+	
+		legendControl.addTo(map);
+}
+
+addLegend()
+
 
 function drawLegend(breaks,colorize) {
-	var legendControl = L.control({
-	position: 'topleft'
-	});
-	console.log(breaks)
-	legendControl.onAdd = function(map) {
-
-		var legend = L.DomUtil.create('div', 'legend');
-		return legend;
-
-	};
-
-	legendControl.addTo(map);
+	
 
 	const legend = $('.legend').html("<h3><span>2011</span> Number of Household/ Population per Km&sup2 </h3><ul>");
 
