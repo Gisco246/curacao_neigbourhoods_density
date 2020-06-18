@@ -114,8 +114,9 @@ function processData(neigborhoods, data) {
 	if (neigborhoods.name == 'Neigbourhoods_centroids') {
 		selectAttributeCheckbox(neigborhoods);
 	} else {
+		// getBreaks(neigborhoods, "number of households")
 		drawMap(neigborhoods, colorize);
-		drawLegend(breaks,colorize) ;
+		// drawLegend(breaks,colorize) ; // wait until variable is selected
 	}
 
 
@@ -123,12 +124,12 @@ function processData(neigborhoods, data) {
 
 
 
-function drawMap(data, colorize) {
+function drawMap(joinedData, colorize) {
 
-	console.log(data); // data is now accessible here
+	console.log(joinedData); // data is now accessible here
 	// create Leaflet data layer and add to map
 
-	const neigborhoods = L.geoJson(data, {
+	const neigborhoods = L.geoJson(joinedData, {
 		// style neighbourhoods with initial default path options
 		style: function (feature) {
 			if (feature.geometry.type == "MultiPolygon") {
@@ -181,18 +182,22 @@ function drawMap(data, colorize) {
 	map.fitBounds(neigborhoods.getBounds(), {
 		padding: [18, 18] // add padding around neighbourhoods
 	});
-	selectAttributeDropdown(neigborhoods, colorize);
+	selectAttributeDropdown(neigborhoods, joinedData);
 	//addUi(neighbourhoods); // add the UI controls
 	//updateMap(neighbourhoods); // draw the map 
-	updateMap(neigborhoods, colorize, '');
+	console.log(neigborhoods)
+	updateMap(neigborhoods, '', []);
 
 }
 
 
-function selectAttributeDropdown(neigborhoods, colorize) {
+function selectAttributeDropdown(neigborhoods, joinedData) {
 	$("#dropdown-ui select").change(function () {
 		console.log($(this).val())
-		updateMap(neigborhoods, colorize, $(this).val());
+		const subject = $(this).val()
+		const breaks = getBreaks(joinedData, subject)
+		updateMap(neigborhoods, subject, breaks);
+		drawLegend(breaks, subject)
 	});
 }
 function selectAttributeCheckbox(data) {
@@ -259,7 +264,9 @@ function selectAttributeCheckbox(data) {
 	});
 
 }
-function updateMap(dataLayer, colorize, subject) {
+function updateMap(dataLayer, subject, breaks) {
+
+	const colorize = getColor(breaks)
 
 	dataLayer.eachLayer(function (layer) {
 
@@ -334,11 +341,54 @@ function addLegend() {
 
 addLegend()
 
+function getBreaks(neighborhoods, selected) {
 
-function drawLegend(breaks,colorize) {
-	
+	const rates = [];
+	//console.log('Neigbourhoods..', neigborhoods)
+	// iterate through all the neigborhoods
+	neighborhoods.features.forEach(function (neighborhood) {
 
-	const legend = $('.legend').html("<h3><span>2011</span> Number of Household/ Population per Km&sup2 </h3><ul>");
+		// iterate through all the props of each neighborhood
+		for (const prop in neighborhood.properties.additionalData) {
+			if (neighborhood.geometry.type == "MultiPolygon") {
+
+				if (selected == "population size" || selected == "number of households") {
+
+					rates.push(Number(neighborhood.properties.additionalData[selected] / neighborhood.properties['area_sq_km']));
+					console.log("calculating")
+
+				} 
+				
+				else if (prop == selected) {
+					
+					rates.push(Number(neighborhood.properties.additionalData[selected]))
+				}
+			}
+			}
+
+		})
+		console.log(rates)
+		return chroma.limits(rates, 'q', 5);
+	};
+
+function getColor(breaks) {
+
+	// create class breaks
+	// var breaks = chroma.limits(rates, 'q', 5);
+
+	// create color generator function
+	//var colorize = chroma.scale(chroma.brewer.OrRd).classes(breaks).mode('lab');
+	//var colorize = chroma.scale(['#eff3ff', '#bdd7e7', '#6baed6', '#3182bd', '#08519c']).classes(breaks).mode('lab');// removed , colors not representative of map
+	return chroma.scale(['#ffffb2', '#fecc5c', '#fd8d3c', '#f03b20', '#bd0026']).classes(breaks).mode('lab');// removed , colors not representative of map
+	//var colorize = chroma.scale(['#080000','#400100','#800200','#BF0300','#FF0400']).classes(breaks).mode('lab');// removed , colors not representative of map
+
+}
+
+
+
+function drawLegend(breaks, subject) {
+	const colorize = getColor(breaks)
+	const legend = $('.legend').html(`<h3><span>2011</span> ${subject}</h3><ul>`);
 
 	for (let i = 0; i < breaks.length - 1; i++) {
 
