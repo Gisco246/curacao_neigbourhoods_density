@@ -174,6 +174,9 @@ function drawMap(joinedData) {
 
 function selectAttributeDropdown(neigborhoods, joinedData) {
 	$("#dropdown-ui select").change(function () {
+	L.DomEvent.disableScrollPropagation(div);
+	$("#dropdown-ui select").change(function (e) {
+	
 		console.log($(this).val())
 		const subject = $(this).val()
 		const breaks = getBreaks(joinedData, subject)
@@ -302,7 +305,7 @@ function updateMap(dataLayer, subject, breaks) {
 						fillColor: colorize(value)
 					});//.bringToBack();
 				});
-				let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b><br>${subject}; <b>${value}</b>`
+				let tooltipInfo = `<b>${layer.feature.properties['NAME']}</b><br>${subject} <b>${value}</b>`
 
 				// bind a tooltip to layer with county-specific information
 				layer.bindTooltip(tooltipInfo, {
@@ -368,8 +371,8 @@ function getBreaks(neighborhoods, selected) {
 				}
 
 				else if (prop == selected) {
-
-					rates.push(Number(neighborhood.properties.additionalData[selected]))
+					if (Number(neighborhood.properties.additionalData[selected])> 0){
+					rates.push(Number(neighborhood.properties.additionalData[selected]))}
 				}
 			}
 		}

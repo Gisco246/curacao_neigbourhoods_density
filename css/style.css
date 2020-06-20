@@ -70,12 +70,13 @@ p {
     position: absolute;
     right: 1em;
     top: 1em;
-    z-index: 20000;
+    z-index: 10000;
     
 }
 .dropdown-ui select{
     background-color: black !important;
 }
+
 .checkbox{
     border-radius: 5px;
     position: absolute;
