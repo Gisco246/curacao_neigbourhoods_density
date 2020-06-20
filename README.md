@@ -37,3 +37,7 @@ The map will show a measurement of population per unit area of the neighbourhood
 * [Qgis 3.8](https://qgis.org/en/site/forusers/download.html)
 * HTML/CSS
 * [Omnivore](https://docs.mapbox.com/mapbox.js/plugins/#leaflet-omnivore)
+
+
+[Link to the map ](https://gisco246.github.io/curacao_neigbourhoods_density/)
+[Link to my portfolio](https://gisco246.github.io/portfolio/)
