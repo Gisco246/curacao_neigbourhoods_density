@@ -173,8 +173,9 @@ function drawMap(joinedData) {
 }
 
 function selectAttributeDropdown(neigborhoods, joinedData) {
-	$("#dropdown-ui select").change(function () {
+	div = $("#dropdown-ui");
 	L.DomEvent.disableScrollPropagation(div);
+	div.onmousedown = div.ondblclick = div.onpointerdown = L.DomEvent.stopPropagation;
 	$("#dropdown-ui select").change(function (e) {
 	
 		console.log($(this).val())
