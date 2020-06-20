@@ -1,4 +1,4 @@
-﻿fid,neighbourhood,number of households,population size,Average household size,sex ratio,population 0-14 yrs old (%),population 15-64 yrs old (%),population 65+ yrs old (%),curaçaoan-born population (%),foreign-born population (%),first generation migrants (%),second generation migrants (%),population with native background (%),population with intention to leave (%),population with intention to stay (%),income_ang,general fertility rate (children per women 15-49),Unemployment rate (%),participation rate (%),hindrance of air pollution (%),living accommodations in bad condition (%),never married population (%),married population (%),divorced population (%),population living in consensual union (%),neighbourhood area (km²),x,y
+﻿fid,neighbourhood,Number of households,Population size,Average household size,sex ratio,population 0-14 yrs old (%),population 15-64 yrs old (%),population 65+ yrs old (%),curaçaoan-born population (%),foreign-born population (%),first generation migrants (%),second generation migrants (%),population with native background (%),population with intention to leave (%),population with intention to stay (%),income_ang,general fertility rate (children per women 15-49),Unemployment rate (%),Participation rate (%),hindrance of air pollution (%),living accommodations in bad condition (%),never married population (%),married population (%),divorced population (%),population living in consensual union (%),neighbourhood area (km²),x,y
 1,PARADIJS BIJ HEL,23,59,2.6,,,,,,,,,,,,,,,,17.4,,32.7,46.9,8.2,4.1,,,
 2,PARASASA,78,171,2.2,82,16.4,65.5,18.1,52,48,48,17.5,34.5,9.9,66.7,8522,,,,70.5,5.1,23.2,46.5,4.9,12.7,,,
 3,PARERA,22,56,2.5,,,,,,,,,,,,,,,,22.7,4.5,25.5,51.1,8.5,4.3,,,
@@ -116,8 +116,7 @@
 115,ESPERANZA BIJ MINGUELITO,39,98,2.5,,,,,,,,,,,,,,,,13.2,,22.8,49.4,3.8,10.1,,,
 116,THORENQUEST,27,67,2.5,,,,,,,,,,,,,,,,74.1,20.8,44.4,29.6,5.6,7.4,,,
 117,ESPERANZA BIJ WATERLOO,86,250,2.9,87,23.6,66,10.4,84.8,15.2,15.3,12.9,71.8,3.7,65.3,4113,,8.8,53.4,17.4,10.6,38.9,35.8,4.7,15.3,,,
-118,"CHECHE (De Hoop)
-",30,74,2.5,,,,,,,,,,,,,,,,6.7,,27.3,47.3,7.3,10.9,,,
+118,"CHECHE (De Hoop)",30,74,2.5,,,,,,,,,,,,,,,,6.7,,27.3,47.3,7.3,10.9,,,
 119,FANTANJA,17,46,2.7,,,,,,,,,,,,,,,,11.8,17.6,41,30.8,5.1,17.9,,,
 120,TUCACAS,25,87,3.5,,,,,,,,,,,,,,,,,20,32.8,44.8,7.5,11.9,,,
 121,FLEUR DE MARIE,74,156,2.1,93,15.4,64.1,20.5,52.6,47.4,48.7,27,24.3,2.7,71.4,2937,,,,12.7,31.5,39.8,35.2,5.5,9.4,,,
